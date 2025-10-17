@@ -21,13 +21,13 @@ body {
   background: radial-gradient(ellipse at bottom, #0a0a0a 0%, #1a1a1a 100%);
   overflow:hidden; z-index:0;
 }
-/* .privacy-note {
+.privacy-note {
   font-size: 9px;
   color: #ddd;
   margin-top: 8px;
   text-align: center;
   opacity: 0.9;
-} */
+}
 
 /* ---------- MOON ---------- */
 #moon-container {
@@ -62,10 +62,15 @@ body {
   padding:100px 20px 40px; width:100%; z-index:3;
 }
 .greeting-text {
-  font-size:1.2rem; color:#ffd700;
+  font-size:1.2rem; 
+  color:#ffd700;
   text-shadow:0 0 5px #ffcc33,0 0 10px #ff9f43;
-  max-width:90%; line-height:1.5;
+  max-width:90%; 
+  line-height:1.5;
+  overflow-wrap: break-word;   /* ADD THIS */
+  word-wrap: break-word;       /* ADD THIS */
 }
+
 .sender-name {
   margin-top:10px; font-style:italic; color:#ffd700; font-size:1rem;
 }
@@ -93,8 +98,23 @@ body {
 .popup-content { background:#1a1a1a; padding:15px 20px; border-radius:12px;
   text-align:center; min-width:250px; max-width:90%; box-shadow:0 0 10px #ffae00; }
 .popup-content h2 { color:#ffd700; margin-bottom:8px; font-size:1.3rem; }
-.popup-content p { margin-bottom:8px; color:#fff; font-size:0.95rem; }
-.popup-content input { padding:6px 8px; border-radius:8px; border:none; outline:none; margin-bottom:8px; width:90%; font-size:0.95rem; }
+.popup-content p {
+  margin-bottom:8px; 
+  color:#fff; 
+  font-size:0.95rem;
+  overflow-wrap: break-word;   /* ADD THIS */
+  word-wrap: break-word;       /* ADD THIS */
+}
+.popup-content input {
+  width: 100%;                  /* ensure input fits container */
+  max-width: 100%;              /* ADD THIS */
+}
+.lang-toggle {
+  max-width: 95%;
+  overflow-wrap: break-word;
+}
+
+
 .popup-content button { padding:8px 12px; border-radius:8px; border:none; background:#ff9f43; color:white; cursor:pointer; font-weight:bold; font-size:0.9rem; transition:0.3s; }
 .popup-content button:hover { background:#ffcc33; color:#000; }
 
