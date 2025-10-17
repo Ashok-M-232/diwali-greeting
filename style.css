@@ -1,0 +1,78 @@
+/* Reset + Body */
+* { margin:0; padding:0; box-sizing:border-box; }
+body, html {
+  height:100%; width:100%; overflow:hidden;
+  font-family:'Poppins', sans-serif;
+  background:#0a0a0a; color:#fff; position:relative;
+}
+
+/* Popup */
+.popup {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:flex; justify-content:center; align-items:center; z-index:10;
+  flex-direction: column;
+}
+.popup-content {
+  background:#1a1a1a; padding:30px 40px; border-radius:15px; text-align:center;
+  box-shadow:0 0 20px #ffae00;
+  min-width:300px;
+}
+.popup-content h2 { color:#ffd700; margin-bottom:15px; }
+.popup-content p { margin-bottom:15px; color:#fff; font-size:1rem; }
+.popup-content input {
+  padding:10px 15px; border-radius:10px; border:none; outline:none;
+  margin-bottom:15px; width:80%; font-size:1rem;
+}
+.popup-content button {
+  padding:10px 20px; border-radius:10px; border:none; background:#ff9f43;
+  color:white; cursor:pointer; font-weight:bold; transition:0.3s;
+}
+.popup-content button:hover { background:#ffcc33; color:#000; }
+
+/* Greeting */
+.greeting-container { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; z-index:5; text-align:center; padding:20px; }
+.greeting-text { font-size:3rem; color:#ffd700; text-shadow:0 0 15px #ffcc33,0 0 25px #ff9f43; opacity:0; animation:fadeIn 2s forwards; }
+.share-btn { margin-top:20px; padding:10px 20px; border-radius:10px; border:none; background:#ff9f43; color:white; cursor:pointer; transition:0.3s; font-weight:bold; }
+.share-btn:hover { background:#ffcc33; color:#000; }
+
+/* FadeIn */
+@keyframes fadeIn { to { opacity:1; } }
+
+/* Fireworks */
+#fireworks-container, #ground-fireworks-container { position:absolute; width:100%; height:100%; pointer-events:none; top:0; left:0; }
+.rocket { position:absolute; width:4px; height:12px; background:#ffdd33; border-radius:2px; bottom:0; }
+.spark { position:absolute; width:3px; height:3px; background:#ffdd33; border-radius:50%; opacity:0; animation:explode 1s linear forwards; }
+@keyframes explode { 0%{transform:translate(0,0) scale(1); opacity:1;} 100%{transform:translate(var(--x),var(--y)) scale(0.5); opacity:0;} }
+
+/* Ground fireworks */
+.ground-cracker {
+  position:absolute; width:6px; height:12px; border-radius:50%; opacity:0.8;
+  animation:groundPop 0.6s ease-out forwards;
+}
+@keyframes groundPop {
+  0% { transform: translateY(0) scale(1); opacity:1; }
+  50% { transform: translateY(-80px) scale(1.2); opacity:1; }
+  100% { transform: translateY(-100px) scale(0.5); opacity:0; }
+}
+
+/* Stars */
+.star { position:absolute; background:white; border-radius:50%; opacity:0.8; animation:twinkle 2s infinite alternate; }
+@keyframes twinkle { 0%{opacity:0.2;}50%{opacity:1;}100%{opacity:0.2;} }
+
+/* Moon */
+.moon { position:absolute; width:80px; height:80px; background:#f5f3ce; border-radius:50%; box-shadow:0 0 30px #f5f3ce; z-index:1; top:50px; right:100px; }
+
+/* Highlight Receiver Name */
+.receiver-name { color:#ffdd33; font-size:2rem; text-shadow:0 0 15px #fff; }
+
+/* Greeting Message */
+.message { margin-top:10px; font-size:1.2rem; color:#fff; line-height:1.5; }
+.sender-name { margin-top:10px; font-style:italic; color:#ffd700; }
+
+/* Responsive */
+@media(max-width:600px){
+  .greeting-text { font-size:2rem; }
+  .popup-content { padding:20px; }
+  .popup-content input { width:90%; }
+}
