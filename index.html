@@ -4,16 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Diwali 🎆</title>
+
+  <!-- Favicon (small image in browser tab) -->
+  <link rel="icon" href="diwali.png" type="image/png" />
+  
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- Sky background with stars -->
   <div class="sky">
+    <!-- Moon -->
     <div id="moon-container"></div>
+
+    <!-- Stars -->
     <div id="stars-container"></div>
 
-    <!-- Greeting container overlaps sky -->
+    <!-- Fireworks -->
+    <div id="fireworks-container"></div>
+
+    <!-- Greeting Container -->
     <div class="greeting-container">
       <div id="greeting" class="greeting-text"></div>
     </div>
@@ -24,29 +35,30 @@
     <div class="popup-content">
       <h2>🎇 Share Your Diwali Greeting</h2>
       <p id="popupMessage">
-        Enter your name — it will appear as <b>"From &lt;Your Name&gt;"</b>
+        Enter your name — it will appear as <b>"From &lt;Your Name&gt;"</b> 
         when you share this greeting with your friends 🌟
       </p>
       <input type="text" id="nameInput" placeholder="Enter your name" />
       <button id="submitBtn">Continue 🎉</button>
     </div>
   </div>
+  <button id="bigCrackerBtn" class="big-cracker-btn" aria-label="Light big cracker">
+    Light Big Cracker 🎆
+  </button>
 
-  <!-- Fireworks -->
-  <div id="fireworks-container"></div>
-  <div id="ground-fireworks-container"></div>
-  <!-- put inside your .popup-content or below the submit button -->
-<p class="privacy-note">
-  We only collect your name and submission time for the Diwali greeting. This info will not be shared.
-</p>
+  <!-- Privacy Note -->
+  <p class="privacy-note">
+    We only collect your name and submission time for the Diwali greeting. This info will not be shared.
+  </p>
 
-
-  <!-- Scripts -->
+   
+  <!-- JS Scripts -->
   <script src="js/stars.js"></script>
   <script src="js/moon.js"></script>
   <script src="js/fireworks.js"></script>
-  <script src="js/groundFireworks.js"></script>
   <script src="js/name.js"></script>
+  <script src="js/bigcracker.js"></script>
+
 
 </body>
 </html>

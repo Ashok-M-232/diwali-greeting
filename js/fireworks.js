@@ -1,186 +1,55 @@
-// // function launchFireworks() {
-// //   const container = document.getElementById("fireworks-container");
+// ---------- FIREWORKS ----------
 
-// //   const rocket = document.createElement("div");
-// //   rocket.className = "rocket";
-// //   const xPos = Math.random() * window.innerWidth;
-// //   rocket.style.left = xPos + "px";
-// //   container.appendChild(rocket);
-
-// //   let pos = 0;
-// //   const height = Math.random() * (window.innerHeight/2) + 100;
-// //   const rocketInterval = setInterval(() => {
-// //     if(pos >= height) {
-// //       clearInterval(rocketInterval);
-// //       container.removeChild(rocket);
-// //       explodeRocket(xPos, window.innerHeight - pos);
-// //     } else {
-// //       pos += 8;
-// //       rocket.style.bottom = pos + "px";
-// //     }
-// //   }, 22);
-
-// //   setTimeout(launchFireworks, Math.random() * 100 + 500);
-// // }
-
-// // function explodeRocket(x, y) {
-// //   const container = document.getElementById("fireworks-container");
-// //   for(let i=0;i<50;i++){
-// //     const spark = document.createElement("div");
-// //     spark.className="spark";
-// //     const angle=Math.random()*2*Math.PI;
-// //     const distance=Math.random()*100 + 50;
-// //     const xMove = Math.cos(angle)*distance + "px";
-// //     const yMove = Math.sin(angle)*distance + "px";
-// //     spark.style.setProperty('--x', xMove);
-// //     spark.style.setProperty('--y', yMove);
-// //     spark.style.left=x+"px";
-// //     spark.style.bottom=y+"px";
-// //     container.appendChild(spark);
-// //     setTimeout(()=>container.removeChild(spark),1000);
-// //   }
-// // }
-
-// function launchFireworks() {
-//   const container = document.getElementById("fireworks-container");
-
-//   // Launch multiple rockets at once for realism
-//   const rocketsCount = Math.floor(Math.random() * 2) + 1; // 1-2 rockets each cycle
-//   for (let r = 0; r < rocketsCount; r++) {
-//     const rocket = document.createElement("div");
-//     rocket.className = "rocket";
-
-//     const xPos = Math.random() * window.innerWidth;
-//     rocket.style.left = xPos + "px";
-//     container.appendChild(rocket);
-
-//     let pos = 0;
-//     const height = Math.random() * (window.innerHeight / 2) + 150; // higher rockets
-//     const speed = Math.random() * 4 + 4; // varied speed
-
-//     const rocketInterval = setInterval(() => {
-//       if (pos >= height) {
-//         clearInterval(rocketInterval);
-//         container.removeChild(rocket);
-//         explodeRocket(xPos, window.innerHeight - pos);
-//       } else {
-//         pos += speed;
-//         rocket.style.bottom = pos + "px";
-//       }
-//     }, 20);
-//   }
-
-//   // Launch rockets again after random delay
-//   setTimeout(launchFireworks, Math.random() * 400 + 200);
-// }
-
-// function explodeRocket(x, y) {
-//   const container = document.getElementById("fireworks-container");
-//   const sparksCount = Math.floor(Math.random() * 30) + 30; // 30-60 sparks
-
-//   const colors = ["#ffdd33", "#ff5c33", "#33ffec", "#ff33f6", "#33ff57"];
-
-//   for (let i = 0; i < sparksCount; i++) {
-//     const spark = document.createElement("div");
-//     spark.className = "spark";
-
-//     // Random spark color
-//     const color = colors[Math.floor(Math.random() * colors.length)];
-//     spark.style.background = color;
-
-//     // Random direction and distance
-//     const angle = Math.random() * 2 * Math.PI;
-//     const distance = Math.random() * 150 + 50;
-//     const xMove = Math.cos(angle) * distance + "px";
-//     const yMove = Math.sin(angle) * distance + "px";
-
-//     spark.style.setProperty('--x', xMove);
-//     spark.style.setProperty('--y', yMove);
-//     spark.style.left = x + "px";
-//     spark.style.bottom = y + "px";
-
-//     // Random size for sparks
-//     const size = Math.random() * 3 + 2;
-//     spark.style.width = spark.style.height = size + "px";
-
-//     container.appendChild(spark);
-
-//     // Random lifespan for sparks
-//     const lifespan = Math.random() * 800 + 700;
-//     setTimeout(() => container.removeChild(spark), lifespan);
-//   }
-// }
-
-// // Start fireworks when script loads
-// launchFireworks();
-
-
-let rocketCount = 0;
-
+// Launch rockets from the bottom randomly
 function launchFireworks() {
   const container = document.getElementById("fireworks-container");
-
-  rocketCount++;
 
   const rocket = document.createElement("div");
   rocket.className = "rocket";
 
-  // Check if this is a big rocket
-  const isBig = (rocketCount % 20 === 0);
+  // Random horizontal position within viewport
+  const xPos = Math.random() * (window.innerWidth - 20);
+  rocket.style.left = xPos + "px";
+  rocket.style.bottom = "0px";
+  rocket.style.width = "4px";
+  rocket.style.height = "15px";
+  rocket.style.background = "#ff9f43";
+  rocket.style.position = "absolute";
+  rocket.style.borderRadius = "2px";
 
-  // Big rocket styling
-  if (isBig) {
-    rocket.style.width = "6px";
-    rocket.style.height = "18px";
-    rocket.style.background = "linear-gradient(to top, #ffdd33, #ff5c33, #ffffff)";
-    rocket.style.boxShadow = "0 0 10px #ffdd33, 0 0 20px #ff5c33";
-  } else {
-    rocket.style.width = "4px";
-    rocket.style.height = "12px";
-    rocket.style.background = "#ffdd33";
-  }
-
-  const startX = Math.random() * window.innerWidth;
-  rocket.style.left = startX + "px";
   container.appendChild(rocket);
 
+  // Rocket height
+  const height = Math.random() * (window.innerHeight / 2) + 100;
   let pos = 0;
-  const maxHeight = Math.random() * (window.innerHeight / 2) + 150;
-  const speed = Math.random() * 4 + 4;
-  const curve = (Math.random() - 0.5) * 100;
-  const startLeft = startX;
 
+  // Animate rocket upwards
   const rocketInterval = setInterval(() => {
-    if (pos >= maxHeight) {
+    if (pos >= height) {
       clearInterval(rocketInterval);
       container.removeChild(rocket);
-      explodeRocket(startLeft, window.innerHeight - pos, isBig);
+      explodeRocket(xPos, pos); // Explode at current position
     } else {
-      pos += speed;
+      pos += 6; // speed of rocket
       rocket.style.bottom = pos + "px";
-      rocket.style.left = startLeft + (pos / maxHeight) * curve + "px";
     }
   }, 20);
 
-  setTimeout(launchFireworks, Math.random() * 300 + 200);
+  // Repeat rockets randomly
+  setTimeout(launchFireworks, Math.random() * 1000 + 500);
 }
 
-function explodeRocket(x, y, big = false) {
+// Explode rocket into sparks
+function explodeRocket(x, y) {
   const container = document.getElementById("fireworks-container");
 
-  const sparksCount = big ? 120 : Math.floor(Math.random() * 30) + 30;
-  const colors = big 
-    ? ["#ffd700", "#ff4500", "#ff69b4", "#00ffff", "#ff7f50"] 
-    : ["#ffdd33", "#ff5c33", "#33ffec", "#ff33f6", "#33ff57"];
-
-  for (let i = 0; i < sparksCount; i++) {
+  for (let i = 0; i < 25; i++) {
     const spark = document.createElement("div");
     spark.className = "spark";
 
-    spark.style.background = colors[Math.floor(Math.random() * colors.length)];
-
+    // Random direction and distance
     const angle = Math.random() * 2 * Math.PI;
-    const distance = Math.random() * (big ? 250 : 100) + (big ? 100 : 50);
+    const distance = Math.random() * 100 + 50;
     const xMove = Math.cos(angle) * distance + "px";
     const yMove = Math.sin(angle) * distance + "px";
 
@@ -189,15 +58,147 @@ function explodeRocket(x, y, big = false) {
     spark.style.left = x + "px";
     spark.style.bottom = y + "px";
 
-    const size = Math.random() * (big ? 5 : 3) + 2;
-    spark.style.width = spark.style.height = size + "px";
+    // Spark styles
+    spark.style.width = spark.style.height = Math.random() * 3 + 2 + "px";
+    spark.style.background = ["#ff4d4d", "#ffcc33", "#33ffcc", "#ff66ff"][Math.floor(Math.random() * 4)];
+    spark.style.position = "absolute";
+    spark.style.borderRadius = "50%";
+    spark.style.opacity = 1;
+    spark.style.transition = "transform 0.8s ease-out, opacity 0.8s ease-out";
 
     container.appendChild(spark);
 
-    const lifespan = Math.random() * (big ? 1500 : 1000) + 700;
-    setTimeout(() => container.removeChild(spark), lifespan);
+    // Animate spark
+    setTimeout(() => {
+      spark.style.transform = `translate(${xMove}, ${yMove}) scale(0.5)`;
+      spark.style.opacity = 0;
+    }, 10);
+
+    // Remove spark after animation
+    setTimeout(() => {
+      if (spark.parentNode) container.removeChild(spark);
+    }, 900);
   }
 }
 
-// Start fireworks
+// Big cracker: launch a big rocket and explode into a large colorful burst
+function launchBigCracker() {
+  const container = document.getElementById("fireworks-container");
+  if (!container) return;
+
+  // Lock spacing to viewport
+  const maxX = Math.max(0, window.innerWidth - 40);
+  const startX = Math.random() * (maxX - 60) + 30; // margin from sides
+
+  // Create big rocket
+  const rocket = document.createElement("div");
+  rocket.className = "big-rocket";
+  rocket.style.left = startX + "px";
+  rocket.style.bottom = "0px";
+  container.appendChild(rocket);
+
+  // Rocket flight params
+  const peak = Math.random() * (window.innerHeight * 0.35) + (window.innerHeight * 0.45); // higher peak
+  const speed = 8 + Math.random() * 3; // pixels per tick
+  let pos = 0;
+
+  const interval = setInterval(() => {
+    pos += speed;
+    rocket.style.bottom = pos + "px";
+
+    // slight horizontal sway for realism
+    const sway = Math.sin(pos / 40) * 8;
+    rocket.style.left = (startX + sway) + "px";
+
+    if (pos >= peak) {
+      clearInterval(interval);
+      // remove rocket element
+      if (rocket.parentNode) container.removeChild(rocket);
+      // explode big
+      explodeBig(startX, pos);
+    }
+  }, 20);
+}
+
+// Explosion function for big cracker
+function explodeBig(x, y) {
+  const container = document.getElementById("fireworks-container");
+  if (!container) return;
+
+  const colors = ["#ffd700","#ff5733","#ff33d4","#33fff0","#7cff33","#ff8c00","#ff3366"];
+  const bigCount = 140; // number of sparks
+  const maxDistance = Math.max(window.innerWidth, window.innerHeight) * 0.45;
+
+  for (let i = 0; i < bigCount; i++) {
+    const spark = document.createElement("div");
+    spark.className = "big-spark";
+
+    // random size and color
+    const size = Math.random() * 6 + 3;
+    spark.style.width = spark.style.height = size + "px";
+    spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+    spark.style.left = x + "px";
+    spark.style.bottom = y + "px";
+
+    // pick random direction and distance
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * (maxDistance * 0.6) + (maxDistance * 0.15);
+    const xMove = Math.cos(angle) * distance;
+    const yMove = Math.sin(angle) * distance;
+
+    // Movement + fade via transform + opacity
+    spark.style.transition = `transform ${800 + Math.random()*800}ms cubic-bezier(.1,.6,.2,1), opacity ${800 + Math.random()*800}ms linear`;
+    container.appendChild(spark);
+
+    // cause layout/paint then animate
+    requestAnimationFrame(() => {
+      spark.style.transform = `translate(${xMove}px, ${-yMove}px) scale(0.5)`;
+      spark.style.opacity = "0";
+    });
+
+    // cleanup after animation
+    setTimeout(() => {
+      if (spark.parentNode) container.removeChild(spark);
+    }, 1800 + Math.random() * 800);
+  }
+
+  // small secondary ring (glow) — optional visual
+  const ring = document.createElement("div");
+  ring.style.position = "absolute";
+  ring.style.left = (x - 6) + "px";
+  ring.style.bottom = (y - 6) + "px";
+  ring.style.width = "12px";
+  ring.style.height = "12px";
+  ring.style.borderRadius = "50%";
+  ring.style.boxShadow = "0 0 40px 16px rgba(255,200,70,0.12)";
+  ring.style.pointerEvents = "none";
+  ring.style.zIndex = 780;
+  container.appendChild(ring);
+  setTimeout(()=>{ if(ring.parentNode) ring.parentNode.removeChild(ring); }, 650);
+}
+
+// Button click handler with short debounce/disable to avoid spam
+const bigBtn = document.getElementById("bigCrackerBtn");
+if (bigBtn) {
+  bigBtn.addEventListener("click", () => {
+    // disable for 1200ms to avoid overlapping spam
+    bigBtn.disabled = true;
+    launchBigCracker();
+    setTimeout(() => { bigBtn.disabled = false; }, 1200);
+  });
+}
+
+// (Optional) allow keyboard 'b' key to trigger big cracker for accessibility
+document.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() === 'b') {
+    // mimic button press
+    if (bigBtn && !bigBtn.disabled) {
+      bigBtn.disabled = true;
+      launchBigCracker();
+      setTimeout(()=>bigBtn.disabled=false,1200);
+    }
+  }
+});
+
+// Initialize fireworks
 launchFireworks();
