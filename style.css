@@ -1,78 +1,118 @@
-/* Reset + Body */
 * { margin:0; padding:0; box-sizing:border-box; }
-body, html {
-  height:100%; width:100%; overflow:hidden;
+html {
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
+body {
+  width:100%;
+  min-height:100%;
   font-family:'Poppins', sans-serif;
-  background:#0a0a0a; color:#fff; position:relative;
+  background:#0a0a0a; 
+  color:#fff;
+  position:relative;
+  overflow-x:hidden; /* prevent horizontal scroll */
 }
 
-/* Popup */
-.popup {
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.85);
-  display:flex; justify-content:center; align-items:center; z-index:10;
-  flex-direction: column;
+/* ---------- SKY ---------- */
+.sky {
+  position:relative; width:100%; min-height:100vh;
+  background: radial-gradient(ellipse at bottom, #0a0a0a 0%, #1a1a1a 100%);
+  overflow:hidden; z-index:0;
 }
-.popup-content {
-  background:#1a1a1a; padding:30px 40px; border-radius:15px; text-align:center;
-  box-shadow:0 0 20px #ffae00;
-  min-width:300px;
-}
-.popup-content h2 { color:#ffd700; margin-bottom:15px; }
-.popup-content p { margin-bottom:15px; color:#fff; font-size:1rem; }
-.popup-content input {
-  padding:10px 15px; border-radius:10px; border:none; outline:none;
-  margin-bottom:15px; width:80%; font-size:1rem;
-}
-.popup-content button {
-  padding:10px 20px; border-radius:10px; border:none; background:#ff9f43;
-  color:white; cursor:pointer; font-weight:bold; transition:0.3s;
-}
-.popup-content button:hover { background:#ffcc33; color:#000; }
-
-/* Greeting */
-.greeting-container { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; z-index:5; text-align:center; padding:20px; }
-.greeting-text { font-size:3rem; color:#ffd700; text-shadow:0 0 15px #ffcc33,0 0 25px #ff9f43; opacity:0; animation:fadeIn 2s forwards; }
-.share-btn { margin-top:20px; padding:10px 20px; border-radius:10px; border:none; background:#ff9f43; color:white; cursor:pointer; transition:0.3s; font-weight:bold; }
-.share-btn:hover { background:#ffcc33; color:#000; }
-
-/* FadeIn */
-@keyframes fadeIn { to { opacity:1; } }
-
-/* Fireworks */
-#fireworks-container, #ground-fireworks-container { position:absolute; width:100%; height:100%; pointer-events:none; top:0; left:0; }
-.rocket { position:absolute; width:4px; height:12px; background:#ffdd33; border-radius:2px; bottom:0; }
-.spark { position:absolute; width:3px; height:3px; background:#ffdd33; border-radius:50%; opacity:0; animation:explode 1s linear forwards; }
-@keyframes explode { 0%{transform:translate(0,0) scale(1); opacity:1;} 100%{transform:translate(var(--x),var(--y)) scale(0.5); opacity:0;} }
-
-/* Ground fireworks */
-.ground-cracker {
-  position:absolute; width:6px; height:12px; border-radius:50%; opacity:0.8;
-  animation:groundPop 0.6s ease-out forwards;
-}
-@keyframes groundPop {
-  0% { transform: translateY(0) scale(1); opacity:1; }
-  50% { transform: translateY(-80px) scale(1.2); opacity:1; }
-  100% { transform: translateY(-100px) scale(0.5); opacity:0; }
+.privacy-note {
+  font-size: 9px;
+  color: #ddd;
+  margin-top: 8px;
+  text-align: center;
+  opacity: 0.9;
 }
 
-/* Stars */
-.star { position:absolute; background:white; border-radius:50%; opacity:0.8; animation:twinkle 2s infinite alternate; }
+/* ---------- MOON ---------- */
+#moon-container {
+  position: absolute; /* Keep moon fixed */
+  top:5%; left:5%;
+  width:60px; height:60px;
+  z-index:2;
+}
+.moon {
+  width:100%; height:100%;
+  background:#f5f3ce;
+  border-radius:50%;
+  box-shadow:0 0 15px #f5f3ce;
+}
+
+/* ---------- STARS ---------- */
+#stars-container {
+  position:absolute; width:100%; height:100%; top:0; left:0;
+  pointer-events:none; z-index:1;
+}
+.star {
+  position:absolute; width:2px; height:2px;
+  background:white; border-radius:50%; opacity:0.8;
+  animation:twinkle 2s infinite alternate;
+}
 @keyframes twinkle { 0%{opacity:0.2;}50%{opacity:1;}100%{opacity:0.2;} }
 
-/* Moon */
-.moon { position:absolute; width:80px; height:80px; background:#f5f3ce; border-radius:50%; box-shadow:0 0 30px #f5f3ce; z-index:1; top:50px; right:100px; }
-
-/* Highlight Receiver Name */
-.receiver-name { color:#ffdd33; font-size:2rem; text-shadow:0 0 15px #fff; }
-
-/* Greeting Message */
-.message { margin-top:10px; font-size:1.2rem; color:#fff; line-height:1.5; }
-.sender-name { margin-top:10px; font-style:italic; color:#ffd700; }
-
-/* Responsive */
-@media(max-width:600px){
-  .greeting-text { font-size:2rem; }
-  .popup-content { padding:20px; }
-  .popup-content input { width:90%; }
+/* ---------- GREETING CONTAINER ---------- */
+.greeting-container {
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:flex-start; text-align:center;
+  padding:100px 20px 40px; width:100%; z-index:3;
 }
+.greeting-text {
+  font-size:1.2rem; color:#ffd700;
+  text-shadow:0 0 5px #ffcc33,0 0 10px #ff9f43;
+  max-width:90%; line-height:1.5;
+}
+.sender-name {
+  margin-top:10px; font-style:italic; color:#ffd700; font-size:1rem;
+}
+.share-btn {
+  margin-top:15px; padding:8px 14px; border-radius:8px; border:none;
+  background:#ff9f43; color:white; cursor:pointer; transition:0.3s;
+  font-weight:bold; font-size:0.95rem;
+}
+.share-btn:hover { background:#ffcc33; color:#000; }
+
+/* ---------- FIREWORKS ---------- */
+#fireworks-container, #ground-fireworks-container {
+  position:absolute; width:100%; height:100%; pointer-events:none; top:0; left:0; z-index:1;
+}
+.rocket { position:absolute; border-radius:2px; }
+.spark { position:absolute; border-radius:50%; opacity:0; animation:explode 1s linear forwards; }
+@keyframes explode { 0%{transform:translate(0,0) scale(1); opacity:1;} 100%{transform:translate(var(--x),var(--y)) scale(0.5); opacity:0;} }
+.ground-cracker { position:absolute; border-radius:50%; opacity:0.8; animation:groundPop 0.6s ease-out forwards; }
+@keyframes groundPop { 0%{transform:translateY(0) scale(1); opacity:1;} 50%{transform:translateY(-80px) scale(1.2); opacity:1;} 100%{transform:translateY(-100px) scale(0.5); opacity:0;} }
+
+/* ---------- POPUPS ---------- */
+.popup { position:fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.85); display:flex; justify-content:center; align-items:center;
+  z-index:10; flex-direction:column; padding:10px; }
+.popup-content { background:#1a1a1a; padding:15px 20px; border-radius:12px;
+  text-align:center; min-width:250px; max-width:90%; box-shadow:0 0 10px #ffae00; }
+.popup-content h2 { color:#ffd700; margin-bottom:8px; font-size:1.3rem; }
+.popup-content p { margin-bottom:8px; color:#fff; font-size:0.95rem; }
+.popup-content input { padding:6px 8px; border-radius:8px; border:none; outline:none; margin-bottom:8px; width:90%; font-size:0.95rem; }
+.popup-content button { padding:8px 12px; border-radius:8px; border:none; background:#ff9f43; color:white; cursor:pointer; font-weight:bold; font-size:0.9rem; transition:0.3s; }
+.popup-content button:hover { background:#ffcc33; color:#000; }
+
+/* ---------- LANGUAGE BUTTON ---------- */
+.translate-btn {
+  position:fixed; top:10px; right:10px; background:#ff9f43; border:none;
+  border-radius:6px; padding:6px 10px; font-weight:bold; cursor:pointer; color:white;
+  box-shadow:0 0 8px #ffae00; font-size:0.85rem; z-index:5;
+}
+
+/* ---------- RESPONSIVE MEDIA ---------- */
+@media(max-width:320px){ .greeting-text{font-size:0.95rem;} .popup-content h2{font-size:1.1rem;} }
+@media(min-width:321px) and (max-width:400px){ .greeting-text{font-size:1rem;} }
+@media(min-width:401px) and (max-width:500px){ .greeting-text{font-size:1.1rem;} }
+@media(min-width:501px) and (max-width:600px){ .greeting-text{font-size:1.2rem;} }
+@media(min-width:601px) and (max-width:700px){ .greeting-text{font-size:1.25rem;} }
+@media(min-width:701px) and (max-width:800px){ .greeting-text{font-size:1.3rem;} }
+@media(min-width:801px) and (max-width:900px){ .greeting-text{font-size:1.35rem;} }
+@media(min-width:901px) and (max-width:1000px){ .greeting-text{font-size:1.4rem;} }
+@media(min-width:1001px) and (max-width:1200px){ .greeting-text{font-size:1.5rem;} }
+@media(min-width:1201px){ .greeting-text{font-size:1.6rem;} }

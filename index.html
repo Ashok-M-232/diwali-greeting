@@ -8,42 +8,38 @@
 </head>
 <body>
 
-  <!-- Sky container -->
+  <!-- Sky background with stars -->
   <div class="sky">
     <div id="moon-container"></div>
     <div id="stars-container"></div>
+
+    <!-- Greeting container overlaps sky -->
+    <div class="greeting-container">
+      <div id="greeting" class="greeting-text"></div>
+    </div>
   </div>
 
-  <!-- Initial Name Popup -->
+  <!-- Name Popup -->
   <div class="popup" id="namePopup">
     <div class="popup-content">
-      <h2>Welcome to Diwali Greetings!</h2>
-      <p>Please enter your name:</p>
-      <input type="text" id="nameInput" placeholder="Your Name" />
-      <button id="submitBtn">Next 🎉</button>
+      <h2>🎇 Share Your Diwali Greeting</h2>
+      <p id="popupMessage">
+        Enter your name — it will appear as <b>"From &lt;Your Name&gt;"</b>
+        when you share this greeting with your friends 🌟
+      </p>
+      <input type="text" id="nameInput" placeholder="Enter your name" />
+      <button id="submitBtn">Continue 🎉</button>
     </div>
   </div>
 
-  <!-- Share Popup -->
-  <div class="popup" id="sharePopup">
-    <div class="popup-content">
-      <h2>Share Your Greeting</h2>
-      <p>Enter your name and your friend's name:</p>
-      <input type="text" id="senderName" placeholder="Your Name" />
-      <input type="text" id="receiverName" placeholder="Friend's Name" />
-      <button id="shareSubmitBtn">Send Greeting ✨</button>
-    </div>
-  </div>
-
-  <!-- Greeting Display -->
-  <div class="greeting-container">
-    <div id="greeting" class="greeting-text"></div>
-    <button id="shareBtn" class="share-btn">Share this Greeting 🎉</button>
-  </div>
-
-  <!-- Fireworks Containers -->
+  <!-- Fireworks -->
   <div id="fireworks-container"></div>
   <div id="ground-fireworks-container"></div>
+  <!-- put inside your .popup-content or below the submit button -->
+<p class="privacy-note">
+  We only collect your name and submission time for the Diwali greeting. This info will not be shared.
+</p>
+
 
   <!-- Scripts -->
   <script src="js/stars.js"></script>
@@ -51,5 +47,6 @@
   <script src="js/fireworks.js"></script>
   <script src="js/groundFireworks.js"></script>
   <script src="js/name.js"></script>
+
 </body>
 </html>
