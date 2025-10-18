@@ -38,8 +38,8 @@ body {
 /* ---------- MOON ---------- */
 #moon-container {
   position: absolute; 
-  top: 10%;       /* adjust vertical position */
-  right: 10%;     /* adjust horizontal position */
+  top: 3%;       /* adjust vertical position */
+  right: 3%;     /* adjust horizontal position */
   width: 40px;    /* slightly bigger moon */
   height: 40px;
   z-index: 2;
