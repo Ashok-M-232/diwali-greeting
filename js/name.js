@@ -1,3 +1,96 @@
+// // // Get sender name from URL
+// // function getNameFromURL() {
+// //   const params = new URLSearchParams(window.location.search);
+// //   return params.get('name');
+// // }
+
+// // // Show Diwali greeting
+// // function showGreeting(name) {
+// //   document.getElementById("namePopup").style.display = "none";
+
+// //   const greetingContainer = document.getElementById("greeting");
+// //   greetingContainer.innerHTML = `
+// //     <h2>🪔 Happy Diwali! 🪔</h2>
+// //     <p class="message">
+// //       Diwali is the festival that celebrates the victory of good over evil and light over darkness. 
+// //       It marks the return of Lord Rama and Sita to Ayodhya after defeating the demon king Ravana.<br><br>
+// //       This day reminds us that no matter how strong evil may seem, 
+// //       <b>ధర్మం (Dharma)</b>, <b>న్యాయం (Justice)</b>, and <b>సత్యం (Truth)</b> will always win in the end. 
+// //       When Lord Rama returned home after 14 years of exile, the people of Ayodhya lit diyas (lamps) to welcome him 
+// //       and celebrate the triumph of righteousness.<br><br>
+// //       That’s why even today, we light lamps, decorate our homes, and share sweets — 
+// //       to fill our lives with light, love, and positivity, and to remember the power of 
+// //       ధర్మం, న్యాయం, సత్యం in our daily lives.
+// //     </p>
+// //     <p class="sender-name">From: ${name ? name : "________"}</p>
+// //     <button id="shareBtn" class="share-btn">Share this Greeting 🎉</button>
+// //   `;
+
+// //   // Launch fireworks if available
+// //   if (typeof launchFireworks === "function") launchFireworks();
+// //   if (typeof launchGroundFireworks === "function") launchGroundFireworks();
+
+// //   // Attach share button
+// //   document.getElementById("shareBtn").addEventListener("click", () => {
+// //     openNamePopup();
+// //   });
+// // }
+
+// // // Open popup to enter name before sharing
+// // function openNamePopup() {
+// //   const popup = document.getElementById("namePopup");
+// //   popup.style.display = "flex";
+
+// //   const message = document.getElementById("popupMessage");
+// //   message.innerHTML = `
+// //     Enter your name — it will appear as <b>" Example From : Ashok"</b> 
+// //     when you share this Diwali greeting with your friends 🌟
+// //   `;
+// // }
+
+// // // Copy greeting link to clipboard
+// // function copyGreetingLink(name) {
+// //   const url = new URL(window.location);
+// //   url.searchParams.set('name', name);
+
+// //   navigator.clipboard.writeText(url.href)
+// //     .then(() => alert("🎉 Link copied! Share this greeting with your friends!"))
+// //     .catch(() => alert("Failed to copy link. Try manually."));
+// // }
+
+// // // Initialize page
+// // function init() {
+// //   const urlName = getNameFromURL();
+
+// //   if (urlName) {
+// //     showGreeting(urlName);
+// //   } else {
+// //     showGreeting(null);
+// //   }
+
+// //   // Handle popup submit
+// //   const submitBtn = document.getElementById("submitBtn");
+// //   submitBtn.addEventListener("click", () => {
+// //     const nameInput = document.getElementById("nameInput").value.trim();
+// //     if (!nameInput) {
+// //       alert("Please enter your name!");
+// //       return;
+// //     }
+// //     document.getElementById("namePopup").style.display = "none";
+// //     showGreeting(nameInput);
+// //     copyGreetingLink(nameInput);
+// //   });
+// // }
+
+// // // Run
+// // init();
+
+
+
+// // Google Form setup
+// const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfd4uN8lNk49PruMn-SN1daxFDsq_D5zPL6BoYRVm1IHCch6Q/formResponse";
+// const nameField = "entry.641290821"; // replace with your Name field ID
+
 // // Get sender name from URL
 // function getNameFromURL() {
 //   const params = new URLSearchParams(window.location.search);
@@ -23,7 +116,7 @@
 //       ధర్మం, న్యాయం, సత్యం in our daily lives.
 //     </p>
 //     <p class="sender-name">From: ${name ? name : "________"}</p>
-//     <button id="shareBtn" class="share-btn">Share this Greeting 🎉</button>
+//     <button id="shareBtn" class="share-btn">Click here to edit your name <br>and share your Diwali Greetings! 🎉</button>
 //   `;
 
 //   // Launch fireworks if available
@@ -58,6 +151,18 @@
 //     .catch(() => alert("Failed to copy link. Try manually."));
 // }
 
+// // Submit name to Google Form
+// function submitNameToForm(name) {
+//   const formData = new FormData();
+//   formData.append(nameField, name);
+
+//   fetch(formUrl, {
+//     method: "POST",
+//     mode: "no-cors", // prevents CORS issues
+//     body: formData
+//   }).catch(err => console.error("Form submission failed:", err));
+// }
+
 // // Initialize page
 // function init() {
 //   const urlName = getNameFromURL();
@@ -79,6 +184,7 @@
 //     document.getElementById("namePopup").style.display = "none";
 //     showGreeting(nameInput);
 //     copyGreetingLink(nameInput);
+//     submitNameToForm(nameInput); // <-- added: save name to Google Form
 //   });
 // }
 
@@ -87,23 +193,23 @@
 
 
 
-// Google Form setup
+// ------------------- Google Form setup -------------------
 const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfd4uN8lNk49PruMn-SN1daxFDsq_D5zPL6BoYRVm1IHCch6Q/formResponse";
-const nameField = "entry.641290821"; // replace with your Name field ID
+const nameField = "entry.641290821"; // replace with your Google Form Name field ID
 
-// Get sender name from URL
+// ------------------- Get sender name from URL -------------------
 function getNameFromURL() {
   const params = new URLSearchParams(window.location.search);
   return params.get('name');
 }
 
-// Show Diwali greeting
+// ------------------- Show Diwali greeting -------------------
 function showGreeting(name) {
   document.getElementById("namePopup").style.display = "none";
 
   const greetingContainer = document.getElementById("greeting");
   greetingContainer.innerHTML = `
-    <h2>🪔 Happy Diwali! 🪔</h2>
+    ${name ? `<h1 class="sender-name-top">${name} wishing you a very Happy Diwali!</h1>` : ""}
     <p class="message">
       Diwali is the festival that celebrates the victory of good over evil and light over darkness. 
       It marks the return of Lord Rama and Sita to Ayodhya after defeating the demon king Ravana.<br><br>
@@ -115,33 +221,34 @@ function showGreeting(name) {
       to fill our lives with light, love, and positivity, and to remember the power of 
       ధర్మం, న్యాయం, సత్యం in our daily lives.
     </p>
-    <p class="sender-name">From: ${name ? name : "________"}</p>
-    <button id="shareBtn" class="share-btn">Share this Greeting 🎉</button>
+    <button id="shareBtn" class="share-btn">
+      Click here to edit your name <br>and share your Diwali Greetings! 🎉
+    </button>
   `;
 
-  // Launch fireworks if available
+  // Launch normal fireworks
   if (typeof launchFireworks === "function") launchFireworks();
   if (typeof launchGroundFireworks === "function") launchGroundFireworks();
 
-  // Attach share button
+  // Attach share button click
   document.getElementById("shareBtn").addEventListener("click", () => {
     openNamePopup();
   });
 }
 
-// Open popup to enter name before sharing
+// ------------------- Open popup to enter name before sharing -------------------
 function openNamePopup() {
   const popup = document.getElementById("namePopup");
   popup.style.display = "flex";
 
   const message = document.getElementById("popupMessage");
   message.innerHTML = `
-    Enter your name — it will appear as <b>" Example From : Ashok"</b> 
-    when you share this Diwali greeting with your friends 🌟
+    Enter your name — it will appear as <b>"✨ Ashok wishing you a very Happy Diwali! 🪔 ✨"</b> 
+    when you share this greeting 🌟
   `;
 }
 
-// Copy greeting link to clipboard
+// ------------------- Copy greeting link to clipboard -------------------
 function copyGreetingLink(name) {
   const url = new URL(window.location);
   url.searchParams.set('name', name);
@@ -151,25 +258,35 @@ function copyGreetingLink(name) {
     .catch(() => alert("Failed to copy link. Try manually."));
 }
 
-// Submit name to Google Form
+// ------------------- Submit name to Google Form -------------------
 function submitNameToForm(name) {
   const formData = new FormData();
   formData.append(nameField, name);
 
   fetch(formUrl, {
     method: "POST",
-    mode: "no-cors", // prevents CORS issues
+    mode: "no-cors",
     body: formData
   }).catch(err => console.error("Form submission failed:", err));
 }
 
-// Initialize page
+// ------------------- Initialize Page -------------------
 function init() {
   const urlName = getNameFromURL();
 
   if (urlName) {
+    // Show greeting with name
     showGreeting(urlName);
+
+    // 🚀 Automatically launch the big cracker after greeting appears
+    if (typeof launchBigCracker === "function") {
+      setTimeout(() => {
+        launchBigCracker();
+      }, 1200);
+    }
+
   } else {
+    // No name yet, show greeting with blank
     showGreeting(null);
   }
 
@@ -181,12 +298,21 @@ function init() {
       alert("Please enter your name!");
       return;
     }
+
     document.getElementById("namePopup").style.display = "none";
     showGreeting(nameInput);
+
     copyGreetingLink(nameInput);
-    submitNameToForm(nameInput); // <-- added: save name to Google Form
+    submitNameToForm(nameInput);
+
+    // 🎆 Blast big cracker after entering name
+    if (typeof launchBigCracker === "function") {
+      setTimeout(() => {
+        launchBigCracker();
+      }, 800);
+    }
   });
 }
 
-// Run
+// ------------------- Run -------------------
 init();

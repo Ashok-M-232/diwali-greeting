@@ -37,22 +37,20 @@ body {
 
 /* ---------- MOON ---------- */
 #moon-container {
-  position: absolute; /* Keep moon fixed */
-  top: 5%;
-  left: 5%;
-  width: 60px;
-  height: 60px;
+  position: absolute; 
+  top: 10%;       /* adjust vertical position */
+  right: 10%;     /* adjust horizontal position */
+  width: 40px;    /* slightly bigger moon */
+  height: 40px;
   z-index: 2;
-  max-width: 100%;
-  overflow: hidden;
 }
 
 .moon {
   width: 100%;
   height: 100%;
-  background: #f5f3ce;
+  background: radial-gradient(circle at 30% 30%, #fffacd 0%, #f5f3ce 40%, #e6e2b3 70%, #f5f3ce 100%);
   border-radius: 50%;
-  box-shadow: 0 0 15px #f5f3ce;
+  box-shadow: 0 0 20px 5px #f5f3ce;
 }
 
 /* ---------- STARS ---------- */
@@ -276,7 +274,7 @@ body {
 
 /* ---------- PRIVACY NOTE ---------- */
 .privacy-note {
-  font-size: 9px;
+  font-size: 7.5px;
   color: #ddd;
   margin-top: 8px;
   text-align: center;
@@ -328,6 +326,102 @@ body {
   mix-blend-mode: screen;
   pointer-events: none;
 }
+
+.sender-name-top {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #ffd700;
+  text-align: center;
+  margin-bottom: 18px;
+  text-shadow: 0 0 8px #ff6f00, 0 0 12px #ff9d00, 0 0 20px #ffea00;
+  animation: glowText 1.5s infinite alternate;
+  text-align: center;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 8px #ff6f00, 0 0 12px #ff9d00; }
+  to { text-shadow: 0 0 20px #ffe600, 0 0 30px #ffc300; }
+}
+/* ---------- CHICHUBUDI FIRECRACKERS ---------- */
+.chichubudi {
+  position: fixed;
+  bottom: 25px;
+  width: 65px;
+  height: 130px;
+  background: url('chichubudi.png') no-repeat center/contain;
+  cursor: pointer;
+  z-index: 950;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+#chichubudi-left {
+  left: 20px;
+}
+
+#chichubudi-right {
+  right: 20px;
+}
+
+.chichubudi:hover {
+  filter: brightness(1.2);
+}
+
+.chichubudi:active {
+  transform: scale(0.9);
+}
+
+/* 🔥 Fire animation when clicked */
+.chichubudi-fire::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 12px;
+  height: 80px;
+  background: linear-gradient(to top, orange, yellow, transparent);
+  border-radius: 6px;
+  animation: fireUp 0.8s ease-out forwards;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px rgba(255, 180, 0, 0.7);
+}
+
+@keyframes fireUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-130px) scaleY(1.4);
+  }
+}
+
+/* ---------- RESPONSIVE CHICHUBUDI ---------- */
+@media (max-width: 768px) {
+  .chichubudi {
+    width: 55px;
+    height: 110px;
+    bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chichubudi {
+    width: 45px;
+    height: 90px;
+    bottom: 18px;
+  }
+
+  #chichubudi-left {
+    left: 12px;
+  }
+
+  #chichubudi-right {
+    right: 12px;
+  }
+}
+
 
 
 /* ---------- RESPONSIVE ---------- */
